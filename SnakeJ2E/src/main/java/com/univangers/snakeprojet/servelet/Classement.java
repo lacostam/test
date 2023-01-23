@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Accueil
+ * Servlet implementation class Classement
  */
-@WebServlet("/Accueil")
-public class Accueil extends HttpServlet {
+@WebServlet("/Classement")
+public class Classement extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Accueil() {
+    public Classement() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +26,7 @@ public class Accueil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+		this.getServletContext().getRequestDispatcher("/WEB-INF/classement.jsp").forward(request, response);
 	}
 
 	/**

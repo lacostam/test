@@ -6,33 +6,11 @@
 	</head>
 	<body>
 		<%@ include file="header.jsp" %>
-		<nav class="navbar navbar-expand-lg bg-body-tertiary">
-		  <div class="container-fluid">
-		    <a class="navbar-brand" href="#">Snake Game</a>
-		    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-		      <span class="navbar-toggler-icon"></span>
-		    </button>
-		    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-		      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-		        <li class="nav-item">
-		          <a class="nav-link active" aria-current="page" href="#">Accueil</a>
-		        </li>
-		        <li class="nav-item">
-		          <a class="nav-link" href="#">Classement</a>
-		        </li>
-		        <li class="nav-item">
-		          <a class="nav-link" href="#">Historique</a>
-		        </li>
-		        <li class="nav-item">
-		          <a class="nav-link" href="#">Profil</a>
-		        </li>
-		      </ul>
-		      <form class="d-flex" role="search">
-        		<button class="btn btn-outline-success" type="submit">logout</button>
-        		<button class="btn btn-outline-success" type="submit">login</button>
-      		  </form>  
-		    </div>
-		  </div>
-		</nav>
+		
+	
+		<div class="container" Align=Center>
+			<h1><span style="background-color: #198754 ; border-radius:10px">Bonjour ! TODOPSEUDO JOUEUR</span></h1> 
+		</div>
+		
 	</body>
 </html>
