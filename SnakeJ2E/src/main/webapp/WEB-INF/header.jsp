@@ -25,8 +25,8 @@
 		        </li>
 		      </ul>
 		      <form class="d-flex" role="search">
-        		<button class="btn btn-outline-success" type="submit">logout</button>
-        		<button class="btn btn-outline-success" type="submit">login</button>
+        		<a class="btn btn-outline-success" type="submit" href="#">logout</a>
+        		<a class="btn btn-outline-success" type="submit" href="Login" >login</a>
       		  </form>  
 		    </div>
 		  </div>
