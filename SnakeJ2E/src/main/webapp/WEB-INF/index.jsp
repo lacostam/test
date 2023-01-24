@@ -6,11 +6,10 @@
 	</head>
 	<body>
 		<%@ include file="header.jsp" %>
-		
-	
 		<div class="container" Align=Center>
-			<h1><span style="background-color: #198754 ; border-radius:10px">Bonjour ! TODOPSEUDO JOUEUR</span></h1> 
-		</div>
-		
+			<c:if test="${ !empty sessionScope.pseudo }">
+				<h1><span style="background-color: #198754 ; border-radius:10px"><c:out value="Bonjour ${ sessionScope.pseudo } !" /></span></h1> 
+			</c:if>
+		</div>		
 	</body>
 </html>

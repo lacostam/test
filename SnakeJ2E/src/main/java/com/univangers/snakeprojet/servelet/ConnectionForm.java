@@ -1,26 +1,33 @@
 package com.univangers.snakeprojet.servelet;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 public class ConnectionForm {
-	private String resultat;
-
-	public void verifierIdentifiants(HttpServletRequest request) {
-		String login= request.getParameter("pseudo");
+	
+	private User connectedUser;
+    
+	public boolean verifierIdentifiants(HttpServletRequest request,List<User> users) {
+		String pseudo= request.getParameter("pseudo");
 		String password= request.getParameter("password");
-		if(password.equals(login+"123")) {
-			resultat="Vous êtes connecté !";
-		}else {
-			resultat="Identifiants incorrects !";
+		boolean conn=false;
+		for(User user : users) {
+			if(password.equals(user.getPassword()) && pseudo.equals(user.getPseudo())) {
+				conn=true;
+				connectedUser=user;
+			}
 		}
-
-	}
-	public String getResultat() {
-		return resultat;
+		return conn;
 	}
 
-	public void setResultat(String resultat) {
-		this.resultat = resultat;
+	public User getConnectedUser() {
+		return connectedUser;
 	}
+
+	public void setConnectedUser(User connectedUser) {
+		this.connectedUser = connectedUser;
+	}
+	
 	
 }
