@@ -1,8 +1,10 @@
-package com.univangers.snakeprojet.servelet;
+package com.univangers.snakeprojet.dao;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.univangers.snakeprojet.entity.User;
 
 public class UserDaoImpl implements UserDao {
     private DaoFactory daoFactory;
@@ -13,8 +15,17 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void ajouter(User utilisateur) {
-        
-
+    	Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = connexion.prepareStatement("INSERT INTO USER(pseudo, password) VALUES(?, ?);");
+            preparedStatement.setString(1, utilisateur.getPseudo());
+            preparedStatement.setString(2, utilisateur.getPassword());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -46,6 +57,22 @@ public class UserDaoImpl implements UserDao {
         }
         return utilisateurs;
     }
+
+	@Override
+	public void delete(User utilisateur) {
+		// TODO Auto-generated method stub
+		Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = connexion.prepareStatement(" DELETE FROM USER WHERE pseudo=? AND password=?;");
+            preparedStatement.setString(1, utilisateur.getPseudo());
+            preparedStatement.setString(2, utilisateur.getPassword());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+	}
 
 
 }

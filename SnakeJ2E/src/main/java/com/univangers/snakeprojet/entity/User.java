@@ -1,4 +1,4 @@
-package com.univangers.snakeprojet.servelet;
+package com.univangers.snakeprojet.entity;
 
 public class User {
 	private int userId;

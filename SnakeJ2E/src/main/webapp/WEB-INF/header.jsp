@@ -5,7 +5,7 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
 		  <div class="container-fluid">
 		  
-		    <a class="navbar-brand" href="#">Snake Game</a>
+		    <a class="navbar-brand" href="Accueil">Snake Game</a>
 		    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		      <span class="navbar-toggler-icon"></span>
 		    </button>
@@ -17,16 +17,25 @@
 		        <li class="nav-item">
 		          <a class="nav-link" href="Classement">Classement</a>
 		        </li>
-		        <li class="nav-item">
-		          <a class="nav-link" href="#">Historique</a>
-		        </li>
-		        <li class="nav-item">
-		          <a class="nav-link" href="#">Profil</a>
-		        </li>
+		         <li class="nav-item">
+			          <a class="nav-link" href="Shop">Shop</a>
+			    </li>
+		       	<c:if test="${ !empty sessionScope.user }">
+			        <li class="nav-item">
+			          <a class="nav-link" href="#">Historique</a>
+			        </li>
+			        <li class="nav-item">
+			          <a class="nav-link" href="Profil">Profil</a>
+			        </li>
+		        </c:if>
 		      </ul>
 		      <form class="d-flex" role="search">
-        		<a class="btn btn-outline-success" type="submit" href="#">logout</a>
-        		<a class="btn btn-outline-success" type="submit" href="Login" >login</a>
+		      	<c:if test="${ !empty sessionScope.user }">
+        			<a class="btn btn-outline-success" type="submit" href="Logout">logout</a>
+        		</c:if>
+        		<c:if test="${ empty sessionScope.user }">
+        			<a class="btn btn-outline-success" type="submit" href="Login" >login</a>
+      		  	</c:if>
       		  </form>  
 		    </div>
 		  </div>

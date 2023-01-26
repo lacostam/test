@@ -1,4 +1,4 @@
-package com.univangers.snakeprojet.servelet;
+package com.univangers.snakeprojet.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

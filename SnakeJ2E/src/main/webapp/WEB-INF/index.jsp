@@ -6,9 +6,9 @@
 	</head>
 	<body>
 		<%@ include file="header.jsp" %>
-		<div class="container" Align=Center>
-			<c:if test="${ !empty sessionScope.pseudo }">
-				<h1><span style="background-color: #198754 ; border-radius:10px"><c:out value="Bonjour ${ sessionScope.pseudo } !" /></span></h1> 
+		<div class="container" Align=Center style="margin-top: 2em;">
+			<c:if test="${ !empty sessionScope.user }">
+				<h1><span style="border-radius:10px"><c:out value="Bonjour ${ user.pseudo } !" /></span></h1> 
 			</c:if>
 		</div>		
 	</body>

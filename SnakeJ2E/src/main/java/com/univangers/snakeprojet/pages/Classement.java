@@ -1,4 +1,4 @@
-package com.univangers.snakeprojet.servelet;
+package com.univangers.snakeprojet.pages;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

@@ -1,4 +1,4 @@
-package com.univangers.snakeprojet.servelet;
+package com.univangers.snakeprojet.security;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,21 +8,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.univangers.snakeprojet.dao.DaoFactory;
+import com.univangers.snakeprojet.dao.UserDao;
+import com.univangers.snakeprojet.entity.User;
+
 /**
- * Servlet implementation class Login
+ * Servlet implementation class Logout
  */
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/Logout")
+public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private UserDao userDao;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() throws ServletException {
+    public Logout() {
         super();
         DaoFactory daoFactory = DaoFactory.getInstance();
         this.userDao = daoFactory.getUserDao();
-    
         // TODO Auto-generated constructor stub
     }
 
@@ -31,7 +35,9 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+		HttpSession session = request.getSession();
+		session.invalidate();
+	    this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 	}
 
 	/**
@@ -39,15 +45,11 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		ConnectionForm form = new ConnectionForm();
-		boolean conn=form.verifierIdentifiants(request,userDao.lister());
-		if(conn) {
-			HttpSession session = request.getSession();
-	        session.setAttribute("pseudo", form.getConnectedUser().getPseudo());
-			this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
-		}else {
-	        request.setAttribute("error", "Identifiants incorrect");
-			this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
-		}
+		HttpSession session = request.getSession();
+		User usr = ((User) request.getSession().getAttribute("user"));
+		userDao.delete(usr);
+		session.invalidate();
+		this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 	}
+
 }
