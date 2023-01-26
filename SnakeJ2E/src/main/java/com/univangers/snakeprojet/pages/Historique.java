@@ -6,18 +6,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.univangers.snakeprojet.entity.User;
 
 /**
- * Servlet implementation class Classement
+ * Servlet implementation class Historique
  */
-@WebServlet("/Classement")
-public class Classement extends HttpServlet {
+@WebServlet("/Historique")
+public class Historique extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Classement() {
+    public Historique() {
         super();
     }
 
@@ -25,7 +28,13 @@ public class Classement extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		this.getServletContext().getRequestDispatcher("/WEB-INF/classement.jsp").forward(request, response);
+		HttpSession session = request.getSession();
+		User usr = ((User)session.getAttribute("user"));
+		if(usr != null ) {
+			this.getServletContext().getRequestDispatcher("/WEB-INF/historique.jsp").forward(request, response);
+		}else {
+			this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+		}
 	}
 
 	/**

@@ -22,7 +22,7 @@
 			    </li>
 		       	<c:if test="${ !empty sessionScope.user }">
 			        <li class="nav-item">
-			          <a class="nav-link" href="#">Historique</a>
+			          <a class="nav-link" href="Historique">Historique</a>
 			        </li>
 			        <li class="nav-item">
 			          <a class="nav-link" href="Profil">Profil</a>
