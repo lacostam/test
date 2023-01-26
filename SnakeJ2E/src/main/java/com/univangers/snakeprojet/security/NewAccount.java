@@ -36,7 +36,7 @@ public class NewAccount extends HttpServlet {
 		HttpSession session = request.getSession();
 		User usr = ((User)session.getAttribute("user"));
 		if(usr != null ) {
-			this.getServletContext().getRequestDispatcher("/WEB-INF/profil.jsp").forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/Profil");
 		}else{
 			this.getServletContext().getRequestDispatcher("/WEB-INF/newAccount.jsp").forward(request, response);
 		}
@@ -55,7 +55,7 @@ public class NewAccount extends HttpServlet {
 			usr.setPseudo(pseudo);
 			usr.setPassword(password);
 			userDao.ajouter(usr);
-			this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/Login");
 		}else{
 	        request.setAttribute("error", "Pseudo déja utilisé");
 			this.getServletContext().getRequestDispatcher("/WEB-INF/newAccount.jsp").forward(request, response);

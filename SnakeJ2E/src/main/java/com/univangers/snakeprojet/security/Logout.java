@@ -38,7 +38,7 @@ public class Logout extends HttpServlet {
 		User usr = ((User)session.getAttribute("user"));
 		if(usr != null ) {
 			session.invalidate();
-			this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/");
 		}else {
 			this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
 		}
@@ -53,7 +53,7 @@ public class Logout extends HttpServlet {
 		User usr = ((User) request.getSession().getAttribute("user"));
 		userDao.delete(usr);
 		session.invalidate();
-		this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/");
 	}
 
 }

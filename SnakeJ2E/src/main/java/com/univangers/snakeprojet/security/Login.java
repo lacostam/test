@@ -33,10 +33,9 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		
 		User usr = ((User)session.getAttribute("user"));
 		if(usr != null ) {
-			this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/");
 		}else {
 			this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
 		}
@@ -54,7 +53,7 @@ public class Login extends HttpServlet {
 		if(conn) {
 			HttpSession session = request.getSession();
 	        session.setAttribute("user", form.getConnectedUser());
-			this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/");
 		}else {
 	        request.setAttribute("error", "Identifiants incorrect");
 			this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);

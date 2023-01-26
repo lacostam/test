@@ -33,7 +33,7 @@ public class Historique extends HttpServlet {
 		if(usr != null ) {
 			this.getServletContext().getRequestDispatcher("/WEB-INF/historique.jsp").forward(request, response);
 		}else {
-			this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/Login");
 		}
 	}
 
