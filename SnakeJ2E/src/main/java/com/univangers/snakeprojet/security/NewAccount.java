@@ -46,7 +46,7 @@ public class NewAccount extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ConnectionForm form = new ConnectionForm();
+		ConnexionForm form = new ConnexionForm();
 		boolean exist=form.verifierPseudo(request.getParameter("pseudo"),userDao.lister());
 		if(!exist) {
 			String pseudo=request.getParameter("pseudo");

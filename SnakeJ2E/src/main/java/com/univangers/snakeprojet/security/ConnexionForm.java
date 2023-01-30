@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.univangers.snakeprojet.entity.User;
 
-public class ConnectionForm {
+public class ConnexionForm {
 	
 	private User connectedUser;
     

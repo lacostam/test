@@ -15,15 +15,15 @@ import com.univangers.snakeprojet.entity.User;
 /**
  * Servlet implementation class ConnectionSnake
  */
-@WebServlet("/ConnectionSnake")
-public class ConnectionSnake extends HttpServlet {
+@WebServlet("/ConnexionSnake")
+public class ConnexionSnake extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private UserDao userDao;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ConnectionSnake() {
+    public ConnexionSnake() {
         super();
         DaoFactory daoFactory = DaoFactory.getInstance();
         this.userDao = daoFactory.getUserDao();
@@ -37,7 +37,7 @@ public class ConnectionSnake extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 	    String pseudo = request.getParameter("pseudo");
 	    String password = request.getParameter("password");
-	    ConnectionForm form = new ConnectionForm();
+	    ConnexionForm form = new ConnexionForm();
 		User usr = new User();
 		usr.setPseudo(request.getParameter("pseudo"));
 		usr.setPassword(request.getParameter("password"));
@@ -47,7 +47,7 @@ public class ConnectionSnake extends HttpServlet {
 			response.sendError(200,"OK");
 		}else {
 			System.out.println("identifiant incorect");
-			response.sendError(401,"Connection impossible");
+			response.sendError(401,"Connexion impossible");
 
 		}
 	}

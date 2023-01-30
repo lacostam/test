@@ -45,7 +45,7 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ConnectionForm form = new ConnectionForm();
+		ConnexionForm form = new ConnexionForm();
 		User usr = new User();
 		usr.setPseudo(request.getParameter("pseudo"));
 		usr.setPassword(request.getParameter("password"));
