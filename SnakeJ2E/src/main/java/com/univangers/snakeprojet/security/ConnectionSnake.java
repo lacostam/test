@@ -13,31 +13,42 @@ import com.univangers.snakeprojet.dao.UserDao;
 import com.univangers.snakeprojet.entity.User;
 
 /**
- * Servlet implementation class Login
+ * Servlet implementation class ConnectionSnake
  */
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/ConnectionSnake")
+public class ConnectionSnake extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private UserDao userDao;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() throws ServletException {
+    public ConnectionSnake() {
         super();
         DaoFactory daoFactory = DaoFactory.getInstance();
         this.userDao = daoFactory.getUserDao();
-        }
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		User usr = ((User)session.getAttribute("user"));
-		if(usr != null ) {
-			response.sendRedirect(request.getContextPath() + "/Profil");
+		// TODO Auto-generated method stub
+		request.setCharacterEncoding("utf-8");
+	    String pseudo = request.getParameter("pseudo");
+	    String password = request.getParameter("password");
+	    ConnectionForm form = new ConnectionForm();
+		User usr = new User();
+		usr.setPseudo(request.getParameter("pseudo"));
+		usr.setPassword(request.getParameter("password"));
+		boolean conn=form.verifierIdentifiants(usr,userDao.lister());
+		if(conn) {
+			System.out.println(usr.getPseudo()+" connecté");
+			response.sendError(200,"OK");
 		}else {
-			this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+			System.out.println("identifiant incorect");
+			response.sendError(401,"Connection impossible");
+
 		}
 	}
 
@@ -45,18 +56,8 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ConnectionForm form = new ConnectionForm();
-		User usr = new User();
-		usr.setPseudo(request.getParameter("pseudo"));
-		usr.setPassword(request.getParameter("password"));
-		boolean conn=form.verifierIdentifiants(usr,userDao.lister());
-		if(conn) {
-			HttpSession session = request.getSession();
-	        session.setAttribute("user", form.getConnectedUser());
-			response.sendRedirect(request.getContextPath() + "/");
-		}else {
-	        request.setAttribute("error", "Identifiants incorrect");
-			this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
-		}
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
+
 }
