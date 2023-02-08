@@ -35,4 +35,8 @@ public class DaoFactory {
     public UserDao getUserDao() {
         return new UserDaoImpl(this);
     }
+    
+    public PartieDao getPartieDao() {
+        return new PartieDaoImpl(this);
+    }
 }

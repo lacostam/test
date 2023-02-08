@@ -26,7 +26,7 @@ public class Login extends HttpServlet {
         super();
         DaoFactory daoFactory = DaoFactory.getInstance();
         this.userDao = daoFactory.getUserDao();
-        }
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -49,6 +49,7 @@ public class Login extends HttpServlet {
 		User usr = new User();
 		usr.setPseudo(request.getParameter("pseudo"));
 		usr.setPassword(request.getParameter("password"));
+		
 		boolean conn=form.verifierIdentifiants(usr,userDao.lister());
 		if(conn) {
 			HttpSession session = request.getSession();

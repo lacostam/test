@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
-		  <div class="container-fluid">
+		  <div class="container-fluid" style="background-color: rgb(204, 255, 229);">
 		  
 		    <a class="navbar-brand" href="Accueil">Snake Game</a>
 		    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,7 +26,7 @@
 			        </li>
 			        <li class="nav-item">
 			          <a class="nav-link" href="Profil">Profil</a>
-			        </li>
+			        </li>	
 		        </c:if>
 		      </ul>
 		      <form class="d-flex" role="search">

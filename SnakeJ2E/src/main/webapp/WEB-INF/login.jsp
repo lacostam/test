@@ -6,7 +6,7 @@
 	</head>
 	<body>
 		<%@ include file="header.jsp" %>
-		<div class="card" style="width: 50em; margin-left: 2em;margin-top: 2em;">
+		<div class="card" style="width: 60em; margin-left: 2em;margin-top: 2em;">
 		  	<div class="card-body">
 				<c:if test="${ !empty error }">
 					<div class="alert alert-danger" role="alert">

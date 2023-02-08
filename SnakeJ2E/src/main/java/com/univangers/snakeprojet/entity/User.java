@@ -8,9 +8,11 @@ public class User {
 	public int getUserId() {
 		return userId;
 	}
+	
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+	
 	public String getPseudo() {
 		return pseudo;
 	}
