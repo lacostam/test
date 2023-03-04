@@ -1,10 +1,13 @@
 package com.univangers.snakeprojet.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,9 +30,10 @@ public class PartieDaoImpl implements PartieDao{
         PreparedStatement preparedStatement = null;
         try {
             connexion = daoFactory.getConnection();
-            preparedStatement = connexion.prepareStatement("INSERT INTO PARTIE(user_id, score) VALUES(?, ?);");
-            preparedStatement.setInt(1, partie.getPartieId());
+            preparedStatement = connexion.prepareStatement("INSERT INTO PARTIE(user_id,date, score) VALUES(?,CURRENT_TIMESTAMP, ?);");
+            preparedStatement.setInt(1, partie.getIdClient());
             preparedStatement.setInt(2, partie.getScore());
+    		System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -54,11 +58,42 @@ public class PartieDaoImpl implements PartieDao{
 	        	 
 	             String pseudo = resultat.getString("pseudo");
 	             int score = resultat.getInt("score");
-	                 
 	             Partie partie = new Partie(); 
 	             partie.setScore(score); 
 	             partie.setPseudo(pseudo);
-	       
+	             listPartie.add(partie); 
+	        }
+	     }catch (SQLException e) {
+	    	 e.printStackTrace();
+	     }
+	     return listPartie;
+	}
+
+
+
+	@Override
+	public List<Partie> lister(int idClient) {
+		 List<Partie> listPartie = new ArrayList<Partie>();
+	     Connection connexion = null;
+	     Statement statement = null;
+	     ResultSet resultat = null;
+	       PreparedStatement preparedStatement = null;
+	     try {
+	    	 connexion = daoFactory.getConnection();
+	         statement = connexion.createStatement();
+	         //resultat = statement.executeQuery("SELECT score FROM PARTIE WHERE PARTIE.user_id=?;");
+	         
+         	preparedStatement = connexion.prepareStatement("SELECT date,score FROM PARTIE WHERE PARTIE.user_id=? ORDER BY date DESC;");
+            preparedStatement.setInt(1, idClient);
+            resultat = preparedStatement.executeQuery();
+            //preparedStatement.executeUpdate();	       
+            
+	        while (resultat.next()) {
+	             int score = resultat.getInt("score");
+	             Timestamp date = resultat.getTimestamp("date");
+	             Partie partie = new Partie(); 
+	             partie.setScore(score); 	   
+	             partie.setDate(date);
 	             listPartie.add(partie); 
 	        }
 	     }catch (SQLException e) {

@@ -17,18 +17,12 @@
 		          </tr>
 		        </thead>
 		        <tbody>
-		          <tr>
-		            <td>26/01/2023</td>
-		            <td>10</td>
-		          </tr>
-		          <tr>
-		            <td>20/12/2022</td>
-		            <td>4</td>
-		          </tr>
-		          <tr>
-		            <td>11/12/2022</td>
-		            <td>54</td>
-		          </tr>
+		          <c:forEach items="${liste}" var="i">
+			          <tr>
+			            <td>${i.getDate()}</td>
+					    <td>${i.score}</td>
+			          </tr>
+		          </c:forEach>
 		        </tbody>
 		      </table>
     	</div>

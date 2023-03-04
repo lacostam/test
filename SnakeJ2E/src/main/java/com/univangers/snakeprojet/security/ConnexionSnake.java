@@ -44,7 +44,9 @@ public class ConnexionSnake extends HttpServlet {
 		boolean conn=form.verifierIdentifiants(usr,userDao.lister());
 		if(conn) {
 			System.out.println(usr.getPseudo()+" connecté");
-			response.sendError(200,"OK");
+			int id = form.getConnectedUser().getUserId();
+			response.addHeader("id",""+id);
+			response.sendError(200);
 		}else {
 			System.out.println("identifiant incorect");
 			response.sendError(401,"Connexion impossible");
