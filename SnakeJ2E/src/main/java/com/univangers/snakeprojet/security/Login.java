@@ -54,7 +54,7 @@ public class Login extends HttpServlet {
 		if(conn) {
 			HttpSession session = request.getSession();
 	        session.setAttribute("user", form.getConnectedUser());
-			response.sendRedirect(request.getContextPath() + "/");
+			response.sendRedirect(request.getContextPath() + "/Accueil");
 		}else {
 	        request.setAttribute("error", "Identifiants incorrect");
 			this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);

@@ -38,7 +38,7 @@ public class Logout extends HttpServlet {
 		User usr = ((User)session.getAttribute("user"));
 		if(usr != null ) {
 			session.invalidate();
-			response.sendRedirect(request.getContextPath() + "/");
+			response.sendRedirect(request.getContextPath() + "/Accueil");
 		}else {
 			this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
 		}
