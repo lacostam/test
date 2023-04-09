@@ -29,7 +29,11 @@
 				  <div class="card-body">
 				    <h5 class="card-title">Pink Skin</h5>
 				    <p class="card-text">Ce skin est incroyable vite achete le !</p>
-				 	<a href="#" class="btn btn-primary">Acheter</a>
+				 	<c:choose>
+					<c:when test="${ !empty sessionScope.user }">
+					<a href="#" class="btn btn-primary">Acheter</a>
+					</c:when>
+					</c:choose>
 				</div>
 		    </div>
 		  </div>

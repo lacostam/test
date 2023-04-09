@@ -46,18 +46,16 @@ public class NewAccount extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ConnexionForm form = new ConnexionForm();
-		boolean exist=form.verifierPseudo(request.getParameter("pseudo"),userDao.lister());
-		if(!exist) {
-			String pseudo=request.getParameter("pseudo");
-			String password=request.getParameter("password");
-			User usr= new User();
-			usr.setPseudo(pseudo);
-			usr.setPassword(password);
-			userDao.ajouter(usr);
+		try {
+			userDao.ajouter(request);
+		}catch (Exception e) {
+			request.setAttribute("error", e.getMessage());
+			System.out.println("erreur");
+		}
+		
+		if(request.getAttribute("error")==null) {
 			response.sendRedirect(request.getContextPath() + "/Login");
-		}else{
-	        request.setAttribute("error", "Pseudo déja utilisé");
+		}else {
 			this.getServletContext().getRequestDispatcher("/WEB-INF/newAccount.jsp").forward(request, response);
 		}
 	}
