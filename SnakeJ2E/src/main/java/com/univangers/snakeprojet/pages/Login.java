@@ -1,4 +1,4 @@
-package com.univangers.snakeprojet.security;
+package com.univangers.snakeprojet.pages;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -13,17 +13,16 @@ import com.univangers.snakeprojet.dao.UserDao;
 import com.univangers.snakeprojet.entity.User;
 
 /**
- * Servlet implementation class NewAccount
+ * Servlet implementation class Login
  */
-@WebServlet("/NewAccount")
-public class NewAccount extends HttpServlet {
+@WebServlet("/Login")
+public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private UserDao userDao;
-
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NewAccount() {
+    public Login() throws ServletException {
         super();
         DaoFactory daoFactory = DaoFactory.getInstance();
         this.userDao = daoFactory.getUserDao();
@@ -37,8 +36,8 @@ public class NewAccount extends HttpServlet {
 		User usr = ((User)session.getAttribute("user"));
 		if(usr != null ) {
 			response.sendRedirect(request.getContextPath() + "/Profil");
-		}else{
-			this.getServletContext().getRequestDispatcher("/WEB-INF/newAccount.jsp").forward(request, response);
+		}else {
+			this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
 		}
 	}
 
@@ -46,18 +45,21 @@ public class NewAccount extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		try {
-			userDao.ajouter(request);
+			userDao.connexion(request);
 		}catch (Exception e) {
 			request.setAttribute("error", e.getMessage());
-			System.out.println("erreur");
 		}
 		
-		if(request.getAttribute("error")==null) {
-			response.sendRedirect(request.getContextPath() + "/Login");
+		
+		if(request.getAttribute("error")!=null) {
+			this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+			
 		}else {
-			this.getServletContext().getRequestDispatcher("/WEB-INF/newAccount.jsp").forward(request, response);
+			
+			response.sendRedirect(request.getContextPath() + "/Accueil");
 		}
+		
 	}
-
 }

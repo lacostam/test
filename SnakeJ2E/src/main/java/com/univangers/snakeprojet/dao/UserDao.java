@@ -7,6 +7,7 @@ import com.univangers.snakeprojet.entity.User;
 
 public interface UserDao {
     void ajouter( HttpServletRequest request) throws DaoException;
-    void delete( User utilisateur);
+    void delete( HttpServletRequest reques);
     List<User> lister();
+	void connexion(HttpServletRequest request) throws DaoException;
 }

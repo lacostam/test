@@ -20,7 +20,7 @@ create table if not exists PARTIE(
   date datetime NOT NULL,
   score int NOT NULL,
   user_id int NOT NULL,
-  foreign key(user_id) references USER(user_id)
+  foreign key(user_id) references USER(user_id) ON DELETE CASCADE
 );
 
 INSERT INTO PARTIE(user_id,date,score) VALUES ("1",CURRENT_TIMESTAMP,"15"); 

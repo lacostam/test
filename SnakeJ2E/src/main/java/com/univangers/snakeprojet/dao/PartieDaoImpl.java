@@ -80,14 +80,10 @@ public class PartieDaoImpl implements PartieDao{
 	       PreparedStatement preparedStatement = null;
 	     try {
 	    	 connexion = daoFactory.getConnection();
-	         statement = connexion.createStatement();
-	         //resultat = statement.executeQuery("SELECT score FROM PARTIE WHERE PARTIE.user_id=?;");
-	         
+	         statement = connexion.createStatement();	         
          	preparedStatement = connexion.prepareStatement("SELECT date,score FROM PARTIE WHERE PARTIE.user_id=? ORDER BY date DESC;");
             preparedStatement.setInt(1, idClient);
-            resultat = preparedStatement.executeQuery();
-            //preparedStatement.executeUpdate();	       
-            
+            resultat = preparedStatement.executeQuery();            
 	        while (resultat.next()) {
 	             int score = resultat.getInt("score");
 	             Timestamp date = resultat.getTimestamp("date");

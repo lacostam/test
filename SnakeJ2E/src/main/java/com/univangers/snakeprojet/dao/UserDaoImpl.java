@@ -3,13 +3,11 @@ package com.univangers.snakeprojet.dao;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import com.univangers.snakeprojet.entity.ConnexionForm;
 import com.univangers.snakeprojet.entity.User;
-import com.univangers.snakeprojet.security.ConnexionForm;
-
-import Entity.DaoException;
 
 public class UserDaoImpl implements UserDao {
     private DaoFactory daoFactory;
@@ -31,7 +29,12 @@ public class UserDaoImpl implements UserDao {
 		boolean existdeja = form.verifierPseudo(pseudo,this.lister());
 		if(existdeja) {
 			throw new DaoException("Pseudo deja utilisé");
+		}else if(password.isBlank() || pseudo.isBlank()){
+			throw new DaoException("Les champs pseudo et password sont obligatoires");
+		}else if(password.length()<5){
+			throw new DaoException("Mot de passe trop court (<5)");
 		}else {
+		
 			User usr= new User();
 			usr.setPseudo(pseudo);
 			usr.setPassword(password);
@@ -78,8 +81,9 @@ public class UserDaoImpl implements UserDao {
     }
 
 	@Override
-	public void delete(User utilisateur) {
+	public void delete(HttpServletRequest request) {
 		// TODO Auto-generated method stub
+		User utilisateur = ((User) request.getSession().getAttribute("user"));
 		Connection connexion = null;
         PreparedStatement preparedStatement = null;
         try {
@@ -87,11 +91,32 @@ public class UserDaoImpl implements UserDao {
             preparedStatement = connexion.prepareStatement(" DELETE FROM USER WHERE pseudo=? AND password=?;");
             preparedStatement.setString(1, utilisateur.getPseudo());
             preparedStatement.setString(2, utilisateur.getPassword());
+            System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("no");
+
         }
 	}
 
+	
+	@Override
+	public void connexion(HttpServletRequest request) throws DaoException {
+		// TODO Auto-generated method stub
+		ConnexionForm form = new ConnexionForm();
+		User usr = new User();
+		usr.setPseudo(request.getParameter("pseudo"));
+		usr.setPassword(request.getParameter("password"));
+		boolean conn=form.verifierIdentifiants(usr,this.lister());
+		if(request.getParameter("pseudo").isBlank() || request.getParameter("password").isBlank()) {
+			throw new DaoException("Les champs pseudo et password sont obligatoires");
+		}else if(!conn ){
+			throw new DaoException("Identifiants incorrect");
+		} else {
+			HttpSession session = request.getSession();
+	        session.setAttribute("user", form.getConnectedUser());
+		}
+	}
 
 }

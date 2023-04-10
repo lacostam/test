@@ -1,4 +1,4 @@
-package com.univangers.snakeprojet.security;
+package com.univangers.snakeprojet.pages;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -13,16 +13,17 @@ import com.univangers.snakeprojet.dao.UserDao;
 import com.univangers.snakeprojet.entity.User;
 
 /**
- * Servlet implementation class Login
+ * Servlet implementation class Logout
  */
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/Logout")
+public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private UserDao userDao;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() throws ServletException {
+    public Logout() {
         super();
         DaoFactory daoFactory = DaoFactory.getInstance();
         this.userDao = daoFactory.getUserDao();
@@ -33,31 +34,25 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		
 		User usr = ((User)session.getAttribute("user"));
 		if(usr != null ) {
-			response.sendRedirect(request.getContextPath() + "/Profil");
+			session.invalidate();
+			response.sendRedirect(request.getContextPath() + "/Accueil");
 		}else {
 			this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
 		}
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ConnexionForm form = new ConnexionForm();
-		User usr = new User();
-		usr.setPseudo(request.getParameter("pseudo"));
-		usr.setPassword(request.getParameter("password"));
-		
-		boolean conn=form.verifierIdentifiants(usr,userDao.lister());
-		if(conn) {
-			HttpSession session = request.getSession();
-	        session.setAttribute("user", form.getConnectedUser());
-			response.sendRedirect(request.getContextPath() + "/Accueil");
-		}else {
-	        request.setAttribute("error", "Identifiants incorrect");
-			this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
-		}
+		HttpSession session = request.getSession();
+		userDao.delete(request);
+		session.invalidate();
+		response.sendRedirect(request.getContextPath() + "/Accueil");
 	}
+
 }

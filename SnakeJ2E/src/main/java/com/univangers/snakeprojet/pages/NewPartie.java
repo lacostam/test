@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.univangers.snakeprojet.dao.DaoFactory;
 import com.univangers.snakeprojet.dao.PartieDao;
+import com.univangers.snakeprojet.entity.ConnexionForm;
 import com.univangers.snakeprojet.entity.Partie;
 import com.univangers.snakeprojet.entity.User;
-import com.univangers.snakeprojet.security.ConnexionForm;
 
 /**
  * Servlet implementation class NewPartie

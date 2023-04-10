@@ -1,10 +1,8 @@
-package com.univangers.snakeprojet.security;
+package com.univangers.snakeprojet.entity;
 
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-
-import com.univangers.snakeprojet.entity.User;
 
 public class ConnexionForm {
 	

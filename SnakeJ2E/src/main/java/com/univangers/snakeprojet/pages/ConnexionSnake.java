@@ -1,4 +1,4 @@
-package com.univangers.snakeprojet.security;
+package com.univangers.snakeprojet.pages;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import com.univangers.snakeprojet.dao.DaoFactory;
 import com.univangers.snakeprojet.dao.UserDao;
+import com.univangers.snakeprojet.entity.ConnexionForm;
 import com.univangers.snakeprojet.entity.User;
 
 /**
@@ -43,12 +44,10 @@ public class ConnexionSnake extends HttpServlet {
 		usr.setPassword(request.getParameter("password"));
 		boolean conn=form.verifierIdentifiants(usr,userDao.lister());
 		if(conn) {
-			System.out.println(usr.getPseudo()+" connecté");
 			int id = form.getConnectedUser().getUserId();
 			response.addHeader("id",""+id);
 			response.sendError(200);
 		}else {
-			System.out.println("identifiant incorect");
 			response.sendError(401,"Connexion impossible");
 
 		}
